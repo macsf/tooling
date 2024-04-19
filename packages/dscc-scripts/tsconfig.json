@@ -10,7 +10,9 @@
     "types": ["node", "jest"],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "declaration": true
+    "declaration": true,
+    "useUnknownInCatchVariables": false,
+    "noImplicitAny": false
   },
   "include": [
     "./src/**/*"
