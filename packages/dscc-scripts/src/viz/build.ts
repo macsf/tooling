@@ -38,11 +38,20 @@ const buildOptions = (
         from: path.join('src', buildValues.manifestFile),
         to: '.',
         transform: (content: Buffer) => {
-          const manifestContents = content.toString();
-          const newManifest = manifestContents
-            .replace(/YOUR_GCS_BUCKET/g, buildValues.gcsBucket)
-            .replace(/"DEVMODE_BOOL"/, `${buildValues.devMode}`);
-          return newManifest;
+          const manifest = JSON.parse(content.toString());
+          manifest.devMode = buildValues.devMode;
+
+          if (buildValues.devMode) manifest.name = manifest.name + ' (dev)'
+
+          manifest.components.forEach(c => {
+            c.resource.js = c.resource.js.replace(/YOUR_GCS_BUCKET/g, buildValues.gcsBucket);
+            c.resource.config = c.resource.config.replace(/YOUR_GCS_BUCKET/g, buildValues.gcsBucket);
+            c.resource.css = c.resource.css.replace(/YOUR_GCS_BUCKET/g, buildValues.gcsBucket);
+
+            if (buildValues.devMode) c.name = c.name + ' (dev)';
+          });
+          
+          return JSON.stringify(manifest, null, 2);
         },
       },
     ]),
