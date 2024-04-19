@@ -128,7 +128,7 @@ export const build = async (args: VizArgs) => {
 
   for (let i = 0; i < buildValues.components.length; i++) {
     const component = buildValues.components[i];
-    console.log(`\n\nBuilding ${component.tsFile} (component ${i})...`);
+    console.log(`\n\nBuilding ${component.jsFile} (component ${i})...`);
     const webpackOptions = buildOptions(buildValues, i);
     const compiler = webpack(webpackOptions);
 
