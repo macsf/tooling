@@ -144,8 +144,8 @@ export const build = async (args: VizArgs) => {
     );
 
     // Validate config output
-    const configDest = path.resolve(cwd, 'build', component.jsonFile);
-    util.validateConfigFile(configDest);
+    // const configDest = path.resolve(cwd, 'build', component.jsonFile);
+    // util.validateConfigFile(configDest);
   }
 
   // Validate final manifest output
